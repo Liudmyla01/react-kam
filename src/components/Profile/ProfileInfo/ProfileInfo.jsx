@@ -5,8 +5,8 @@ const ProfileInfo = () => {
     return (
         <div>
             <div>
-                <img
-                    src='https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&h=350'/>
+                <img id={s.newImg}
+                    src='https://i.pinimg.com/originals/c4/47/d3/c447d32be251e260e1c66e9d1ca09b2d.jpg'/>
             </div>
             <div className={s.descriptionBlock}>
                 ava + description
