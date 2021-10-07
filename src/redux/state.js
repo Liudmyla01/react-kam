@@ -1,4 +1,5 @@
 const UPDATE_NEW_MESS_BODY = 'UPDATE_NEW_MESS_BODY';
+const SEND_MESSAGE = 'SEND_MESSEGE';
 
 let store = {
     _state: {
@@ -55,7 +56,13 @@ let store = {
             this._callSubscriber(this._state);
         }else if(action.type === UPDATE_NEW_MESS_BODY){
             this._state.dialogsPage.newMessageBody = action.body;
-            this._callSubscriber(this._state);
+            this._callSubscriber(this._state); 
+        }else if(action.type === SEND_MESSAGE){
+            let body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({id: 6, message: body});
+            this._callSubscriber(this._state); 
+
         }
     }
 };
@@ -65,7 +72,8 @@ export let updateNewPostText = (text) => ({
         type: 'UPDATE-NEW-POST-TEXT',
         newText: text
     });
-
+export const sendMessageCreator = () =>({ type: SEND_MESSAGE});
+export const updateNewMessageBodyCreator = (body) => ({ type: UPDATE_NEW_MESS_BODY, body: body});
 
 window.store = store;
 
