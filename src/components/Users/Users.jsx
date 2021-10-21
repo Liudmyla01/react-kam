@@ -1,11 +1,11 @@
-import axios from 'axios';
+import * as axios from 'axios';
 import React from 'react';
 import s from './Users.module.css';
-
+import ava from '../../assets/img/ava.jpeg'
 let Useres = (props) =>{
     if (props.users.length ===0){
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            props.setUsers()
+            props.setUsers(response.data.items)
         })
 
     // props.setUsers([{id:1,photoSrc:'https://funpick.ru/wp-content/uploads/2018/02/Ava-pats-12.jpg',followed:false, fullName: 'Liudmyla', status: 'Frontend devel', location:{country: 'Ukraine', city:'Nikolaev'}},
@@ -20,7 +20,7 @@ let Useres = (props) =>{
            props.users.map(u => {
              return <div  className={s.fontColor}>
                  <span>
-                    <div><img src={u.photoSrc} alt="" className={s.uphoto} /></div>
+                    <div><img src={u.photos.small != null ? u.photos.small : ava } alt="" className={s.uphoto} /></div>
                     <div> 
                         {u.followed 
                         ? <button onClick={()=>{ props.unfollow(u.id)}}>Unfollow</button> 
@@ -30,12 +30,12 @@ let Useres = (props) =>{
                  </span>
                  <span>
                      <span>
-                         <div>{u.fuulName}</div>
+                         <div>{u.name}</div>
                          <div>{u.status}</div>
                      </span>
                      <span>
-                         <div>{u.location.country}</div>
-                         <div>{u.location.city}</div>
+                         {/* <div>{u.location.country}</div>
+                         <div>{u.location.city}</div> */}
                      </span>
                  </span>
              </div>
