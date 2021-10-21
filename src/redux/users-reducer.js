@@ -4,12 +4,7 @@ const setUsers = 'SET_USERS';
 
 let initialState = {
     users:[
-        {id:1,photoSrc:'https://funpick.ru/wp-content/uploads/2018/02/Ava-pats-12.jpg',followed:true, fullName: 'Liudmyla', status: 'Frontend devel', location:{country: 'Ukraine', city:'Nikolaev'}},
-        {id:1,photoSrc:'https://funpick.ru/wp-content/uploads/2018/02/Ava-pats-12.jpg',followed:true, fullName: 'Igor', status: 'machine master', location:{country: 'Ukraine', city:'Kiyev'}},
-        {id:1,photoSrc:'https://funpick.ru/wp-content/uploads/2018/02/Ava-pats-12.jpg',followed:false, fullName: 'Tom', status: 'waiter', location:{country: 'Romania', city:'Bicaz'}},
-        {id:1,photoSrc:'https://funpick.ru/wp-content/uploads/2018/02/Ava-pats-12.jpg',followed:true, fullName: 'Alex', status: 'Co-founder', location:{country: 'Ukraine', city:'Kiyev'}},
-        {id:1,photoSrc:'https://funpick.ru/wp-content/uploads/2018/02/Ava-pats-12.jpg',followed:false, fullName: 'Dima', status: 'guru', location:{country: 'Belarus', city:'Minsk'}},
-    ]
+        ]
 }
 
 const usersReducer = (state = initialState, action) =>{
@@ -38,7 +33,7 @@ const usersReducer = (state = initialState, action) =>{
         case setUsers:
             return {
                 ...state,
-                users: [...state.users, action.users]
+                users: [...state.users, ...action.users]
             }
         default:
             return state
@@ -47,5 +42,5 @@ const usersReducer = (state = initialState, action) =>{
 
 export const followAC = (userID)=> ({type: follow, userID});
 export const unfollowAC = (userID)=> ({type: unfollow, userID});
-export const setUsersAC = (userID)=> ({type: setUsers, userID});
+export const setUsersAC = (users)=> ({type: setUsers, users});
 export default usersReducer;
