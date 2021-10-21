@@ -4,19 +4,16 @@ import s from './Users.module.css';
 import ava from '../../assets/img/ava.jpeg'
 
 class Users extends React.Component {
-    getUsers = () => {
-        if (this.props.users.length ===0){
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                this.props.setUsers(response.data.items)
-            })
-        }
+    constructor(props){
+        super(props);
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        .then(response => {
+                    this.props.setUsers(response.data.items)      
+    })
     }
-
     render(){
         return <div>
-        <div>
-            <button onClick={this.getUsers}>getU</button>
-        </div>
+         
        {
            this.props.users.map(u => {
              return <div  className={s.fontColor}>
