@@ -6,15 +6,35 @@ import ava from '../../assets/img/ava.jpeg'
 class Users extends React.Component {
     
     componentDidMount(){
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
         .then(response => {
-                    this.props.setUsers(response.data.items)      
+                    this.props.setUsers(response.data.items);
+                    this.props.setTotalUsersCount(response.data.totalCount)       
     })
 
     }
+    onPageChange = (pageNum) =>{
+        this.props.setCurrentPage(pageNum);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNum}&count=${this.props.pageSize}`)
+        .then(response => {
+                    this.props.setUsers(response.data.items) 
+                            })
+            }
+
     render(){
+        let pagesCount = Math.ceil (this.props.totalUserCpunt/this.props.pageSize);//сколько страниц будет отображать пагинац
+      
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)  
+        }
         return <div>
-         
+         <div>
+             {pages.map(p => {
+                return <span className={this.props.currentPage === p && s.numPage} 
+                onClick={(e)=>{this.onPageChange(p)}}> {p}</span> 
+             })}
+         </div>
        {
            this.props.users.map(u => {
              return <div  className={s.fontColor}>
