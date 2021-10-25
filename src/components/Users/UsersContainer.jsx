@@ -76,7 +76,7 @@ let mapStateToProps = (state) =>{
 //     }
 // }
 
-// прокинули прямо в connect,если название совпадает, иожно оставлять одно(follow)  и меняем названия AC в reducer
+//mapDispatchToProps  прокинули прямо в connect,если название совпадает, иожно оставлять одно(follow)  и меняем названия AC в reducer
  
 export default connect(mapStateToProps, {
     follow, unfollow, setUsers,

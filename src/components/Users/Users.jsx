@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './Users.module.css';
-import ava from '../../assets/img/ava.jpeg'
+import ava from '../../assets/img/ava.jpeg';
+import { NavLink } from 'react-router-dom';
 
 let Users = (props) =>{
     let pagesCount = props.totalUsersCount/props.pageSize;//сколько страниц будет отображать пагинац
@@ -23,7 +24,11 @@ let Users = (props) =>{
       props.users.map(u => {
         return <div  className={s.fontColor}>
             <span>
-               <div><img src={u.photos.small != null ? u.photos.small : ava } alt="" className={s.uphoto} /></div>
+               <div> 
+                   <NavLink to={'/profile/' + u.id }>
+                   <img src={u.photos.small != null ? u.photos.small : ava } alt="" className={s.uphoto} />
+                       </NavLink >
+                   </div>
                <div> 
                    {u.followed 
                    ? <button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button> 
