@@ -6,7 +6,7 @@ const ProfileInfo = (props) => {
     if(!props.profile){
         return <Preloader/>  
     }
-    console.log(props.profile);
+    console.log(props);
     return (
         <div>
             <div>
@@ -14,7 +14,7 @@ const ProfileInfo = (props) => {
                     src='https://i.pinimg.com/originals/c4/47/d3/c447d32be251e260e1c66e9d1ca09b2d.jpg'/>
             </div>
             <div className={s.descriptionBlock}>
-                <div>About me: {props.profile.aboutMe}</div>
+                <div className={s.aboutMe}>About me: {props.profile.aboutMe}</div>
                
                 <img src={props.profile.photos.large } alt="" />
                 <span>Contact : {props.profile.contacts.facebook}</span>
