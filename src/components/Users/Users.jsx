@@ -2,6 +2,7 @@ import React from 'react'
 import s from './Users.module.css';
 import ava from '../../assets/img/ava.jpeg';
 import { NavLink } from 'react-router-dom';
+import * as axios from 'axios';
 
 let Users = (props) =>{
     let pagesCount = props.totalUsersCount/props.pageSize;//сколько страниц будет отображать пагинац
@@ -31,8 +32,35 @@ let Users = (props) =>{
                    </div>
                <div> 
                    {u.followed 
-                   ? <button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button> 
-                   : <button onClick={()=>{props.follow(u.id)}}>Follow</button>}
+                   ? <button onClick={()=>{
+                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                    {withCredentials: true,
+                        headers: {
+                            "API-KEY": "cf8d67d9-8199-46f6-a219-04d2a9b16456"
+                        }
+                    })
+                    .then(response => {
+                        if(response.data.resultCode === 0){
+                            props.unfollow(u.id)
+                        }
+                    });   
+                    
+                }}>Unfollow</button> 
+                : <button onClick={()=>{
+                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},
+                    {withCredentials: true,
+                        headers: {
+                            "API-KEY": "cf8d67d9-8199-46f6-a219-04d2a9b16456"
+                        }
+                    })
+                    .then(response => {
+                        if(response.data.resultCode === 0){
+                            props.follow(u.id) 
+                          }
+                });  
+
+
+                      }}>Follow</button>}
                    
                </div>
             </span>
