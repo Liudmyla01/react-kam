@@ -1,29 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { follow, setCurrentPage, toggleIsFeatching, setTotalUsersCount, setUsers, unfollow, toggleIsFollowingProgress } from '../../redux/users-reducer';
+import { followSucces, setCurrentPage, unfollowSucces, toggleIsFollowingProgress,getUsers} from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader'
-import { usersAPI } from '../../api/api';
+
 
 
 class UsersContainer extends React.Component {
     
     componentDidMount(){
-        this.props.toggleIsFeatching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                    this.props.toggleIsFeatching(false );
-                    this.props.setUsers(data.items);
-                    this.props.setTotalUsersCount(data.totalCount)       
-    })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
 
     }
     onPageChange = (pageNum) =>{
-        this.props.setCurrentPage(pageNum);
-        this.props.toggleIsFeatching (true);
-        usersAPI.getUsers(pageNum, this.props.pageSize).then(data => {
-            this.props.toggleIsFeatching(false );
-                    this.props.setUsers(data.items) 
-                            })
+        this.props.getUsers(pageNum, this.props.pageSize)
             }
 
     render(){
@@ -35,8 +25,8 @@ class UsersContainer extends React.Component {
                         currentPage={this.props.currentPage}
                         onPageChange = {this.onPageChange}
                         users = {this.props.users }
-                        follow = {this.props.follow }
-                        unfollow = {this.props.unfollow }
+                        follow = {this.props.followSucces}
+                        unfollow = {this.props.unfollowSucces}
                         toggleIsFollowingProgress = {this.props.toggleIsFollowingProgress}
                         followinginProgress ={this.props.followinginProgress}
                         /> 
@@ -57,8 +47,7 @@ let mapStateToProps = (state) =>{
 //mapDispatchToProps  прокинули прямо в connect,если название совпадает, иожно оставлять одно(follow)  и меняем названия AC в reducer
  
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers,
-   setCurrentPage, setTotalUsersCount,toggleIsFeatching,
-   toggleIsFollowingProgress
+   followSucces,unfollowSucces, setCurrentPage, 
+   toggleIsFollowingProgress, getUsers
     }
 )(UsersContainer);
