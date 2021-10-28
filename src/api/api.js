@@ -12,10 +12,31 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10){
-    return   instance.get(`users?page=${currentPage}&count=${pageSize}`, 
+    return   instance.get(`users?page=${currentPage}&count=${pageSize}`,
                         ).then(response => {
                             return response.data});
-    }    
+    },
+    unfollowUsers(ueserId){
+        return instance.delete(`follow/${ueserId}`).then(response =>{
+            return response.data
+            
+        })
+    },
+    followUsers(ueserId){
+       return instance.post(`follow/${ueserId}`,{},)
+                        .then(response => {
+                            return response.data
+                        })   
+    },
+    authMe(props){
+       return instance.get(`auth/me`)
+        .then(response => {
+            if(response.data.resultCode === 0){
+                  let {id, login, email} = response.data.data;
+                  props.setUserData(id,email,login)
+              }
+    });
+    } 
     
 } 
 
