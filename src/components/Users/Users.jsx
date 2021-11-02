@@ -2,7 +2,6 @@ import React from 'react'
 import s from './Users.module.css';
 import ava from '../../assets/img/ava.jpeg';
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
 
 let Users = (props) => {
     let pagesCount = props.totalUsersCount / props.pageSize;//сколько страниц будет отображать пагинац

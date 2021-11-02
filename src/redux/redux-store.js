@@ -14,6 +14,8 @@ let redusers = combineReducers({
     userPage: usersReducer,
     auth: authReducer
 })
+
+//applyMiddleware(thunkMiddleware) - для внедрения thunk
 let store = createStore(redusers,applyMiddleware(thunkMiddleware));
 
 window.store = store;

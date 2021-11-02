@@ -27,7 +27,6 @@ class UsersContainer extends React.Component {
                         users = {this.props.users }
                         follow = {this.props.followSucces}
                         unfollow = {this.props.unfollowSucces}
-                        toggleIsFollowingProgress = {this.props.toggleIsFollowingProgress}
                         followinginProgress ={this.props.followinginProgress}
                         /> 
             </>

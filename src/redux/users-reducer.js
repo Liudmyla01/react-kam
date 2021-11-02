@@ -101,7 +101,7 @@ export const followSucces = (userID) => {
             dispatch(toggleIsFollowingProgress(false, userID))
         });
 
-}
+}  
 }
 export const unfollowSucces = (userID) => { 
     return (dispatch) =>{
