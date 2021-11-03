@@ -3,8 +3,10 @@ import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 
 class ProfileStatus extends React.Component{
+   
     state = {
-        editMode:false
+        editMode:false,
+        status:this.props.status
     }
 activateEditMode(){
     this.setState({
@@ -14,9 +16,15 @@ activateEditMode(){
 deactivatEditMode(){
     this.setState({
         editMode:false
-    })
+    });
+    this.props.updateStatus(this.state.status);
 }
+onStatusCha = (e) => { 
+this.setState({
+    status:e.currentTarget.value
+})
 
+}
 
 
     render(){
@@ -28,7 +36,7 @@ deactivatEditMode(){
         }
         {this.state.editMode &&
             <div>
-            <input autoFocus={true} onBlur={this.deactivatEditMode.bind(this)} value={this.props.status}/>
+            <input onChange={this.onStatusCha}  autoFocus={true} onBlur={this.deactivatEditMode.bind(this)} value={this.state.status}/>
             </div>
     }
         </div>
