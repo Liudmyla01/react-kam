@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { followSucces, setCurrentPage, unfollowSucces, toggleIsFollowingProgress,getUsers} from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader'
+import { compose } from 'redux';
+import { withAuthRedirect } from '../../hoc/withAuthRederect';
 
 
 
@@ -45,8 +47,12 @@ let mapStateToProps = (state) =>{
 }
 //mapDispatchToProps  прокинули прямо в connect,если название совпадает, иожно оставлять одно(follow)  и меняем названия AC в reducer
  
-export default connect(mapStateToProps, {
-   followSucces,unfollowSucces, setCurrentPage, 
-   toggleIsFollowingProgress, getUsers
-    }
-)(UsersContainer);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        followSucces,unfollowSucces, setCurrentPage, 
+        toggleIsFollowingProgress, getUsers
+         }
+     )
+)(UsersContainer)
+
