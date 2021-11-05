@@ -1,0 +1,13 @@
+/* .formControl.fatal {
+    color: rgb(255, 0, 179)
+}; */
+.formControl.fatal input,
+.formControl.fatal textarea {
+    border: 2px solid red;
+   
+};
+
+.formControl.fatal span{
+   color: red;
+}
+
