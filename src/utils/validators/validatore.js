@@ -1,6 +1,6 @@
 export const required = value => {
     if(value) return undefined;
-    return 'blablabla'
+    return 'Пустое поле'
 };
 
 export const maxLenghtC = (maxLenght) => (value) => {
