@@ -5,6 +5,7 @@ import Users from './Users';
 import Preloader from '../common/Preloader/Preloader'
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRederect';
+import { getAllUsers, getCurrentPage, getFollowinginProgress, getIsFetching, getPageSize, getTotalUserCpunt } from '../../redux/users-selector';
 
 
 
@@ -37,12 +38,12 @@ class UsersContainer extends React.Component {
 }
 let mapStateToProps = (state) =>{
     return{
-        users: state.userPage.users,
-        pageSize: state.userPage.pageSize,
-        totalUserCpunt: state.userPage.totalUserCpunt,
-        currentPage: state.userPage.currentPage,
-        isFetching: state.userPage.isFetching,
-        followinginProgress:state.userPage.followinginProgress
+        users: getAllUsers(state),
+        pageSize: getPageSize(state),
+        totalUserCpunt: getTotalUserCpunt(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followinginProgress:getFollowinginProgress(state)
     }
 }
 //mapDispatchToProps  прокинули прямо в connect,если название совпадает, иожно оставлять одно(follow)  и меняем названия AC в reducer
